@@ -10,7 +10,6 @@ copyright = 'Muhammed Sezer'
 author = copyright
 release = '0.0.1'
 
-latex_logo = 'logo.png'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

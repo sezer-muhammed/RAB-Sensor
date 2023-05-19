@@ -72,19 +72,53 @@ Specifications
    :widths: 20, 20
 
    "Package", "Optical LGA16"
-   "Size", "6.4 x 3.0 x 1.5 mm"
-   "Ranging", "2 to 400 cm per zone"
-   "Operating Voltage (IOVDD)", "1.8, 2.8, or 3.3 V"
-   "Operating Voltage (AVDD)", "2.8 or 3.3 V"
-   "Operating Temperature", "-30 to 85°C"
-   "Sample Rate", "Up to 60 Hz"
-   "Infrared Emitter", "940 nm"
-   "I2C Interface", "400 kHz to 1 MHz serial bus, Address: 0x52"
-   "Operating Mode", "Continuous or Autonomous"
-
+   "Size", "0.5″ x 0.7″ x 0.085″ (13 mm x 18 mm x 2 mm)"
+   "Ranging", "20 mm to 4000 mm per zone"
+   "Operating Voltage (IOVDD)", "2.8 V to 5.5 V"
+   "Operating Temperature", -30 to 85°C"
+   "Infrared Emitter", "940 nm invisible Class 1 VCSEL (vertical cavity surface-emitting laser)"
+   "I2C Interface", "400 kHz (I²C fast mode standard), Address: 0101001b on power-up"
+   "Operating Mode", "Continuous"
 
 
 More Information
 ================
 
-For more details about the VL53L5CX ToF sensor, refer to the official datasheet: https://www.st.com/resource/en/datasheet/vl53l5cx.pdf
+For more details about the VL53L5CX ToF sensor, refer to the official datasheet: https://www.st.com/resource/en/datasheet/vl53l5cx.pdf. 
+
+Or pololu version with more examples: https://www.pololu.com/product/3417
+
+Complete datasheet: https://www.pololu.com/file/0J1878/vl53l5cx.pdf
+
+Arduino Library with examples: https://github.com/sparkfun/SparkFun_VL53L5CX_Arduino_Library
+
+Using the VL53L5CX with I²C
+==============================
+
+The VL53L5CX is a carrier board for ST’s VL53L5CX laser-ranging sensor, offering fast and accurate ranging up to 4 m through a digital I²C interface. 
+
+Connections
+------------
+
+At least four connections are necessary to use the VL53L5CX board: VIN, GND, SCL, and SDA. 
+
+- **VIN**: This should be connected to a 2.8 V to 5.5 V source. 
+- **GND**: This should be connected to 0 volts. 
+
+The I²C pins, SCL and SDA, are connected to built-in level-shifters that make them safe to use at voltages over 3.3 V. They should be connected to an I²C bus operating at the same logic level as VIN. 
+
+Pinout
+-------
+
+- **VIN**: This is the main 2.8 V to 5.5 V power supply connection. The SCL and SDA level shifters pull the I²C lines high to this level. 
+- **SDA**: Level-shifted I²C data line: HIGH is VIN, LOW is 0 V  
+- **SCL**: Level-shifted I²C clock line: HIGH is VIN, LOW is 0 V  
+
+I²C communication
+--------------------
+
+The VL53L5CX can be configured and its distance readings can be queried through the I²C bus. Level shifters on the I²C clock (SCL) and data (SDA) lines enable I²C communication with microcontrollers operating at the same voltage as VIN (2.8 V to 5.5 V). 
+
+The sensor’s 7-bit target address defaults to 0101001b on power-up. It can be changed to another value by writing one of the device configuration registers, but the new address only applies until the sensor is reset or powered off. 
+
+The I²C interface on the VL53L5CX is compliant with the I²C fast mode (400 kHz) standard. 
